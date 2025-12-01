@@ -6,11 +6,11 @@ export default function NavBar() {
     return (
         // sticky top-0 to make navbar stick to top when scrolling
         // z-50 to make sure navbar is on top of other elements
-        <div className="navbar sticky top-0 w-full z-50">
+        <div className="navbar sticky top-0 w-full z-50 bg-[#0A0E0F]">
             <div className="flex flex-row justify-between items-center">
                 <div className="navbar-container flex flex-row gap-5 p-2.5 w-auto">
                     <h3 className="font-bold">
-                        <a className="text-(--secondary-color)" href="#home">
+                        <a className="text-(--secondary-color)" href="#intro">
                             <span className="text-(--primary-color) underline text-3xl">K</span>evin Pratama
                         </a>
                     </h3>
@@ -18,7 +18,7 @@ export default function NavBar() {
                     <ul className="navbar-links flex flex-row gap-2.5 w-auto h-auto items-end">
                         <li><a className="hover:text-gray-400 text-white" href="#about-me">About</a></li>
                         <li><a className="hover:text-gray-400 text-white" href="#projects">Projects</a></li>
-                        <li><a className="hover:text-gray-400 text-white" href="#contact">Contact</a></li>
+                        <li><a className="hover:text-gray-400 text-white" href="mailto:kpratama1201@gmail.com">Contact</a></li>
                     </ul>
                 </div>
 

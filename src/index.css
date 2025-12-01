@@ -15,7 +15,8 @@
   --text-color-gray-5: #E0E0E0;
   --text-color-gray-4: #BDBDBD;
   --text-color-white: #FFFFFF;
-
+  --bg-color-black-3: #282828;
+  
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

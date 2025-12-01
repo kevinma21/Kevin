@@ -4,7 +4,7 @@ import "../styles/Intro.css";
 
 export default function Intro() {
     return (
-        <div id="intro" className="flex flex-col gap-2.5 justify-center items-center h-screen">
+        <div id="intro" className="flex flex-col gap-2.5 justify-center items-center h-screen scroll-mt-40">
             <div className="flex flex-col gap-1 p-2.5 text-center w-auto h-auto">
                  <Typist typingDelay={120} cursor={<span className='cursor text-(--secondary-color) text-5xl font-bold'>|</span>} >
                     <h1 className="text-4xl font-bold text-white">

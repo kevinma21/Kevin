@@ -30,7 +30,7 @@ export default function About() {
         "Python"
     ]
     return (
-        <div className="flex px-25 py-2.5 gap-7.5">
+        <div id="about-me" className="flex px-25 py-2.5 gap-7.5 scroll-mt-50">
             <div className="flex flex-col p-2.5 gap-5">
                 {contents.first}
                 {contents.second}
