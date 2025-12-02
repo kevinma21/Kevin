@@ -24,7 +24,7 @@ export default function Intro() {
             </div>
             
             <a href="mailto:kpratama1201@gmail.com">
-                <div className="flex flex-row gap-2.5 p-4 m-5 border border-solid border-(--primary-color) w-auto h-auto justify-center items-center rounded-md hover:bg-(--primary-color-hover)">
+                <div className="flex flex-row gap-2.5 p-4 m-5 border border-solid border-(--primary-color) w-auto h-auto justify-center items-center rounded-md hover:bg-(--bg-color-black-3)">
                     <EmailIcon style={{ fontSize: 30, color: 'var(--primary-color)' }}></EmailIcon>
                     <p className="text-lg text-(--secondary-color)"> Say hi! </p>
                 </div>
