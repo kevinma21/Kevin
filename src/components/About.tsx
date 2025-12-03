@@ -43,7 +43,7 @@ export default function About() {
                 </ul>
                 {contents.third}
             </div>
-            <img src={Kevin} alt="Kevin Pratama" />
+            <img src={Kevin} className="hover:skew-2" alt="Kevin Pratama" />
         </div>
     );
 }
