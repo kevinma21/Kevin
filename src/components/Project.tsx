@@ -1,5 +1,6 @@
 import FolderIcon from '@mui/icons-material/Folder';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import FadeSection from './FadeSection';
 
 export default function Project() {
     const projects = {
@@ -15,18 +16,18 @@ export default function Project() {
         },
         "Book Shelf Api": {
             desc: "CRUD API manages a bookshelf system with features to add, view, update, and delete books.",
-            tech: "Hapi.js",
+            tech: "JavaScript, Hapi.js",
             link: "https://github.com/kevinma21/Book-Shelf-API"
         },
-        "B": {
-            desc: "CRUD API manages a bookshelf system with features to add, view, update, and delete books.",
-            tech: "Hapi.js",
-            link: "https://github.com/kevinma21/Book-Shelf-API"
+        "Annotation Web": {
+            desc: "Manual labeling tool for tweet replies to support sentiment analysis research.",
+            tech: "Next.js, Tailwind, Prisma, PosgreSQL, Supabase",
+            link: "https://github.com/kevinma21/Annotation-Web"
         },
-        "Bo": {
-            desc: "CRUD API manages a bookshelf system with features to add, view, update, and delete books.",
-            tech: "Hapi.js",
-            link: "https://github.com/kevinma21/Book-Shelf-API"
+        "Frontend-CMS": {
+            desc: "A frontend CMS web application that allows administrators to manage and display website content with multi-language support and theme customization.",
+            tech: "Next.js, Tailwind",
+            link: "https://github.com/kevinma21/content-management-system"
         },
         "Book S": {
             desc: "CRUD API manages a bookshelf system with features to add, view, update, and delete books.",
@@ -39,25 +40,28 @@ export default function Project() {
         <div id="projects" className="px-25 py-2.5 scroll-mt-50">
             <ul className="grid grid-cols-3 gap-2">
                 {Object.entries(projects).map(([title, props]) => (
-                    <li className="bg-(--bg-color-black-3) border border-(--secondary-color) rounded-4xl p-6 flex flex-col gap-2">
-                        <div className="flex flex-col h-[150px] p-5">
-                            <div className="flex flex-rows justify-between p-2">
-                                <FolderIcon style={ { fontSize: 40, color: "var(--primary-color)" } } />
-                                <a className="hover:text-white" href={props.link}><GitHubIcon /></a>
+                    <FadeSection>
+                        <li className="bg-(--bg-color-black-3) border border-(--secondary-color) rounded-4xl p-6 flex flex-col gap-2">
+                            <div className="flex flex-col h-[150px] p-5">
+                                <div className="flex flex-rows justify-between p-2">
+                                    <FolderIcon style={ { fontSize: 40, color: "var(--primary-color)" } } />
+                                    <a className="hover:text-white" href={props.link}><GitHubIcon /></a>
+                                </div>
+                                <h2 className="text-2xl text-white p-2">
+                                    {title}
+                                </h2>
                             </div>
-                            <h2 className="text-2xl text-white p-2">
-                                 {title}
-                            </h2>
-                        </div>
-                        <div className="p-5 h-[150px]" >
-                            <p>
-                                {props.desc}
+                            <div className="p-5 h-[150px]" >
+                                <p>
+                                    {props.desc}
+                                </p>
+                            </div>
+                            <p className="text-(--primary-color) p-5 h-20">
+                                    {props.tech}
                             </p>
-                        </div>
-                        <p className="text-(--primary-color) p-5 h-20">
-                                {props.tech}
-                        </p>
-                    </li>
+                        </li>
+                    </FadeSection>
+                    
                 ))}
             </ul>
         </div>

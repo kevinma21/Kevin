@@ -1,4 +1,5 @@
 import Kevin from '/assets/kevin-pratama.png'
+import FadeSection from './FadeSection';
 
 export default function About() {
     const contents = {
@@ -13,12 +14,6 @@ export default function About() {
         "second": (
             <p>
                 Here are some of the technologies I have been working with lately:
-            </p>
-        ),
-        "third": (
-            <p>
-                Outside of coding, I’m interested in the development of science and like spending time 
-                watching TV shows.
             </p>
         )
     }
@@ -37,13 +32,18 @@ export default function About() {
                 <ul className="grid grid-cols-2">
                     {tech_stack.map((item) => {
                         return (
-                            <li className="text-(--primary-color)">▹ {item}</li>
+                            <FadeSection>
+                                <li className="text-(--primary-color)">▹ {item}</li>
+                            </FadeSection>
                         );
                     })}
                 </ul>
-                {contents.third}
             </div>
-            <img src={Kevin} className="hover:skew-2" alt="Kevin Pratama" />
+            <img 
+                src={Kevin} 
+                className="transition-transform duration-200 ease-in-out hover:scale-105" 
+                alt="Kevin Pratama" 
+            />
         </div>
     );
 }
