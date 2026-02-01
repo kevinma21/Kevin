@@ -30,9 +30,9 @@ export default function About() {
                 {contents.first}
                 {contents.second}
                 <ul className="grid grid-cols-2">
-                    {tech_stack.map((item) => {
+                    {tech_stack.map((item, i) => {
                         return (
-                            <FadeSection>
+                            <FadeSection delay={`${i + 1}00ms`}>
                                 <li className="text-(--primary-color)">▹ {item}</li>
                             </FadeSection>
                         );

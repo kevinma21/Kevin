@@ -29,18 +29,18 @@ export default function Project() {
             tech: "Next.js, Tailwind",
             link: "https://github.com/kevinma21/content-management-system"
         },
-        "Book S": {
-            desc: "CRUD API manages a bookshelf system with features to add, view, update, and delete books.",
-            tech: "Hapi.js",
-            link: "https://github.com/kevinma21/Book-Shelf-API"
+        "Classificaton Pollutan": {
+            desc: "i aim to classify pollutants using two powerful machine learning algorithms: Support Vector Machine (SVM) and Random Forest.",
+            tech: "Python",
+            link: "https://github.com/kevinma21/Classification-Pollutan"
         }
     }
     
     return (
         <div id="projects" className="px-25 py-2.5 scroll-mt-50">
             <ul className="grid grid-cols-3 gap-2">
-                {Object.entries(projects).map(([title, props]) => (
-                    <FadeSection>
+                {Object.entries(projects).map(([title, props], i) => (
+                    <FadeSection delay={`${i + 1}00ms`}>
                         <li className="bg-(--bg-color-black-3) border border-(--secondary-color) rounded-4xl p-6 flex flex-col gap-2">
                             <div className="flex flex-col h-[150px] p-5">
                                 <div className="flex flex-rows justify-between p-2">
