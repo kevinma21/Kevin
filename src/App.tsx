@@ -15,9 +15,9 @@ function App() {
       <NavBar ancestorRef={ref} />
       <div className='px-10 sm:px-25' id="content">
         <Intro />
-        <Heading headingName="about me" />
+        <Heading headingName="About me" />
         <About />
-        <Heading headingName="stuff i made" />
+        <Heading headingName="Stuff i made" />
         <Project />
         <Footer />
       </div>
