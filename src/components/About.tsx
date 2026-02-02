@@ -25,15 +25,15 @@ export default function About() {
         "Python"
     ]
     return (
-        <div id="about-me" className="flex px-25 py-2.5 gap-7.5 scroll-mt-50">
-            <div className="flex flex-col p-2.5 gap-5">
+        <div id="about-me" className="flex md:px-25 md:py-2.5 md:gap-7.5 scroll-mt-50">
+            <div className="flex flex-col p-1.25 gap-2.5 md:p-2.5 md:gap-5">
                 {contents.first}
                 {contents.second}
-                <ul className="grid grid-cols-2">
+                <ul className="grid grid-cols-2 gap-1">
                     {tech_stack.map((item, i) => {
                         return (
                             <FadeSection delay={`${i + 1}00ms`}>
-                                <li className="text-(--primary-color)">▹ {item}</li>
+                                <li key={i} className="text-(--primary-color)">▹ {item}</li>
                             </FadeSection>
                         );
                     })}
@@ -41,7 +41,7 @@ export default function About() {
             </div>
             <img 
                 src={Kevin} 
-                className="transition-transform duration-200 ease-in-out hover:scale-105" 
+                className="hidden md:block transition-transform duration-200 ease-in-out hover:scale-105" 
                 alt="Kevin Pratama" 
             />
         </div>
