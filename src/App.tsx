@@ -13,7 +13,7 @@ function App() {
     <div className="App">
       <div ref={ref} className="h-2 bg-[#0A0E0F]" />
       <NavBar ancestorRef={ref} />
-      <div className='px-25' id="content">
+      <div className='px-10 sm:px-25' id="content">
         <Intro />
         <Heading headingName="about me" />
         <About />

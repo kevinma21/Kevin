@@ -58,8 +58,8 @@ export default function NavBar(props: { ancestorRef: RefObject<HTMLDivElement | 
                     </div>
                 )}
             </div>
-            <div className="fixed top-0 z-10 w-full bg-[#0A0E0F] md:hidden">
-                <div className="flex items-center w-full  px-5">
+            <div className="fixed top-0 z-50 w-full  bg-[#0A0E0F] md:hidden">
+                <div className="flex items-center px-5">
                     <h3 className="font-bold">
                         <a href="#intro">
                             <span className="text-(--primary-color) underline text-3xl">K</span>
