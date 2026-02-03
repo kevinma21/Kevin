@@ -4,7 +4,7 @@ import FadeSection from './FadeSection';
 export default function About() {
     const contents = {
         "first": (
-            <p>
+            <p className='text-justify'>
                 I am an undergraduate student at <a className="text-(--primary-color)" href="https://www.mercubuana.ac.id/">Mercu Buana University</a> who enjoys building things on 
                 the web and figuring out how stuff works behind the scenes. I love learning new 
                 technologies, creating small projects, and exploring ideas that challenge 
@@ -12,7 +12,7 @@ export default function About() {
             </p>
         ),
         "second": (
-            <p>
+            <p className='text-justify'>
                 Here are some of the technologies I have been working with lately:
             </p>
         )
@@ -25,7 +25,7 @@ export default function About() {
         "Python"
     ]
     return (
-        <div id="about-me" className="flex md:px-25 md:py-2.5 md:gap-7.5 scroll-mt-50">
+        <div id="about-me" className="flex 2xl:px-25 pb-30 md:py-2.5 md:gap-7.5 scroll-mt-50">
             <div className="flex flex-col p-1.25 gap-2.5 md:p-2.5 md:gap-5">
                 {contents.first}
                 {contents.second}
@@ -41,7 +41,7 @@ export default function About() {
             </div>
             <img 
                 src={Kevin} 
-                className="hidden md:block transition-transform duration-200 ease-in-out hover:scale-105" 
+                className="hidden lg:block transition-transform duration-200 ease-in-out hover:scale-105" 
                 alt="Kevin Pratama" 
             />
         </div>

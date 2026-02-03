@@ -37,31 +37,30 @@ export default function Project() {
     }
     
     return (
-        <div id="projects" className="px-1 md:px-25 py-2.5 scroll-mt-50">
-            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+        <div id="projects" className="px-1 2xl:px-25 py-2.5 scroll-mt-50">
+            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
                 {Object.entries(projects).map(([title, props], i) => (
                     <FadeSection delay={`${i + 1}00ms`}>
                         <li className="bg-(--bg-color-black-3) border border-(--secondary-color) rounded-4xl p-6 flex flex-col gap-2">
                             <div className="flex flex-col h-37.5 p-5">
                                 <div className="flex flex-rows justify-between p-2">
-                                    <FolderIcon style={ { fontSize: 40, color: "var(--primary-color)" } } />
+                                    <FolderIcon className='text-var(--primary-color)' />
                                     <a className="hover:text-white" href={props.link}><GitHubIcon /></a>
                                 </div>
-                                <h2 className="text-2xl text-white p-2">
+                                <h2 className="text-base md:text-2xl text-white p-2">
                                     {title}
                                 </h2>
                             </div>
                             <div className="p-5 h-37.5" >
-                                <p>
+                                <p className='text-xs md:text-base text-justify'>
                                     {props.desc}
                                 </p>
                             </div>
-                            <p className="text-(--primary-color) p-5 h-20">
+                            <p className="text-xs md:text-base text-(--primary-color) p-5 h-20">
                                     {props.tech}
                             </p>
                         </li>
                     </FadeSection>
-                    
                 ))}
             </ul>
         </div>
