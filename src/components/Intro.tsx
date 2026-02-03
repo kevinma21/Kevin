@@ -32,9 +32,9 @@ export default function Intro() {
             <FadeSection>
                 <a href="mailto:kpratama1201@gmail.com">
 
-                    <div className="flex flex-row gap-1 md:gap-2.5 p-2 md:p-4 m-2.5 md:m-5 border border-solid border-(--primary-color) w-auto h-auto justify-center items-center rounded-sm md:rounded-md hover:bg-(--bg-color-black-3)">
-                        <EmailIcon style={{ color: 'var(--primary-color)' }}></EmailIcon>
-                        <p className="text-sm md:text-lg text-(--secondary-color)"> Say hi! </p>
+                    <div className="flex flex-row gap-1 hover:text-(--primary-color) md:gap-2.5 p-2 md:p-4 m-2.5 md:m-5 border border-solid hover:border-(--primary-color) w-auto h-auto justify-center items-center rounded-sm md:rounded-md hover:bg-(--bg-color-black-3)">
+                        <EmailIcon />
+                        <p className="text-sm md:text-lg "> Say hi! </p>
                     </div>
                 </a>
             </FadeSection>

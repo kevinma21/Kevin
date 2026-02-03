@@ -25,7 +25,7 @@ export default function About() {
         "Python"
     ]
     return (
-        <div id="about-me" className="flex 2xl:px-25 pb-30 md:py-2.5 md:gap-7.5 scroll-mt-50">
+        <div id="about-me" className="flex lg:px-25 pb-30 md:py-2.5 md:gap-7.5 scroll-mt-50">
             <div className="flex flex-col p-1.25 gap-2.5 md:p-2.5 md:gap-5">
                 {contents.first}
                 {contents.second}

@@ -19,7 +19,7 @@ export default function NavBar(props: { ancestorRef: RefObject<HTMLDivElement | 
     
     return (
         <>
-            <div className={`invisible md:visible fixed z-10 left-1/2 -translate-x-1/2 bg-[#0A0E0F] transition-[width,transform,padding,margin,border-radius] duration-300 ease-in-out ${shrink ? 'w-1/2 px-8 rounded-4xl border border-(--primary-color) ' : 'w-full px-25 rounded-none border border-transparent'}`}>
+            <div className={`invisible md:visible fixed z-10 left-1/2 -translate-x-1/2 bg-[#0A0E0F] transition-[width,transform,padding,margin,border-radius] duration-300 ease-in-out ${shrink ? 'w-1/2 px-8 rounded-4xl border hover:border-(--primary-color) ' : 'w-full px-25 rounded-none border border-transparent'}`}>
                 {shrink ? (
                     <div className="flex flex-row justify-between items-center py-3">
                         <ul className='navbar-links flex flex-row gap-2.5 w-auto h-auto items-end'>
