@@ -16,7 +16,7 @@ export default function Intro() {
                 </Typist>
                 <div className="animate-pulse">
                     <h2 className="text-lg md:text-3xl font-bold text-(--text-color-gray-4)">
-                        I Code, I Create, I Reapet.
+                        I Code, I Create, I Repeat.
                     </h2>
                 </div> 
             </div>
