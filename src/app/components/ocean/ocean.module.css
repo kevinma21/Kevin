@@ -1,0 +1,26 @@
+.count {
+    opacity: 0.54;
+}
+
+.counts:hover .count,
+.counts:focus-visible .count {
+    opacity: 0.95;
+}
+
+.counts:focus-visible {
+    outline: 1px solid color-mix(in srgb, var(--foreground-color) 55%, transparent);
+    outline-offset: -4px;
+    border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .counts:not(:hover, :focus-visible) .pulse {
+        animation: count-pulse 600ms ease-out;
+    }
+}
+
+@keyframes count-pulse {
+    from {
+        opacity: 1;
+    }
+}
