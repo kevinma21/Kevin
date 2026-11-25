@@ -79,7 +79,7 @@ const journal = artwork("journalpilot");
 const vault = artwork("devvault");
 const annotation = artwork("annotator-web");
 const cms = artwork("atlantis-cms");
-const collection = artwork("x-api-crawling-based");
+const crawler = artwork("x-api-crawling-based");
 
 export const projects: Project[] = [
     {
@@ -330,51 +330,70 @@ export const projects: Project[] = [
     {
         index: "05",
         slug: "x-api-crawling-based",
-        name: "X Data Collection Pipeline",
+        name: "X Data Crawler",
         description:
-            "A Python pipeline that turns public X timelines and replies into structured datasets for academic analysis.",
-        tech: ["Python", "Requests", "CSV", "JSON"],
+            "A Python crawler I built to collect public X conversations for research on Indonesian political sentiment.",
+        tech: ["Python", "Requests", "GraphQL", "CSV"],
         year: "2026",
         link: "https://github.com/kevinma21/x-api-crawling-based",
-        thumb: collection.thumb,
+        thumb: "/projects/x-api-crawling-based/crawler-preview.webp",
         page: {
-            tagline: "From public timelines and replies to structured research data.",
+            tagline: "Collect public replies with the original posts that give them context.",
             about: [
-                "This academic project separates timeline collection from reply collection. It records post IDs and dates first, then exports conversation replies for downstream analysis. The gallery shows aggregate counts from the saved CSV exports.",
+                "For my research on Indonesian political sentiment, I needed a way to select posts from a public figure’s timeline and keep the original post beside each reply. A short response can be hard to interpret on its own. I built a Python crawler to collect those conversations and export them as CSV files for analysis.",
             ],
-            cover: collection.cover,
-            poster: collection.poster,
-            share: collection.share,
+            cover: crawler.cover,
+            poster: crawler.poster,
+            share: "/projects/x-api-crawling-based/crawler-share.jpg",
             story: [
-                { kind: "heading", text: "Build a dated list of posts" },
+                { kind: "heading", text: "Choose which posts to crawl" },
                 {
                     kind: "text",
                     parts: [
-                        "The first stage records post IDs and timestamps within a specified date window. That CSV provides a lightweight index the reply collector can process separately.",
+                        "I split the crawler into two scripts so I could review the list of posts before making requests for their replies. The timeline script takes an account ID, a date range, and a post limit. It reads the paginated GraphQL responses used by X’s web interface and writes matching post IDs and timestamps to a CSV. The reply crawler can reuse that same list across runs.",
                     ],
                 },
-                { kind: "heading", text: "Export replies and save progress" },
+                { kind: "heading", text: "Keep each reply with its original post" },
                 {
                     kind: "text",
                     parts: [
-                        "The second stage appends structured reply records to a CSV. A JSON checkpoint tracks completed conversations so a later run can resume from the remaining work.",
+                        "For each post ID in the CSV, the reply script reads the original post and then follows the conversation’s pagination. Each exported row includes the original post text alongside the reply, its timestamp, the author’s name and handle, and its like and repost counts. Keeping those fields together makes it possible to review a reply in context directly from the export.",
+                    ],
+                },
+                { kind: "heading", text: "Resume an interrupted crawl" },
+                {
+                    kind: "text",
+                    parts: [
+                        "Both scripts use a shared request manager that retries network failures and waits before retrying rate-limited requests. The batch runner appends rows to the reply CSV and records each processed post ID in a JSON checkpoint. On restart, it skips the IDs already in that file. The checked-in batch configuration caps collection at 150 replies per post. See the batch configuration in ",
+                        {
+                            text: "main.py",
+                            href: "https://github.com/kevinma21/x-api-crawling-based/blob/main/main.py",
+                        },
+                        ".",
+                    ],
+                },
+                { kind: "heading", text: "What the saved crawl captured" },
+                {
+                    kind: "text",
+                    parts: [
+                        "The saved timeline CSV contains 255 post records from Anies Baswedan’s account, dated November 2024 through October 2025. The saved reply CSV contains 1,059 reply records dated October 13–27, 2025. The reply export is a sample shaped by the per-post cap and the conversations returned by X.",
                     ],
                 },
                 {
                     kind: "gallery",
-                    title: "Saved export summaries",
+                    title: "Crawler output",
                     shots: [
-                        collection.shot(
+                        crawler.shot(
                             "timeline",
                             "Timeline export",
                             "Bar chart of collected post records by month from November 2024 through October 2025",
-                            "Counts grouped by post date from the repository’s saved timeline CSV."
+                            "Posts grouped by month in the saved timeline export."
                         ),
-                        collection.shot(
+                        crawler.shot(
                             "replies",
                             "Reply export",
                             "Bar chart of collected reply records by day in October 2025",
-                            "Counts grouped by reply date from the repository’s saved reply CSV."
+                            "Replies grouped by day in the saved conversation export."
                         ),
                     ],
                 },
