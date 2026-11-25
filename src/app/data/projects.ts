@@ -79,7 +79,8 @@ const journal = artwork("journalpilot");
 const vault = artwork("devvault");
 const annotation = artwork("annotator-web");
 const cms = artwork("atlantis-cms");
-const crawler = artwork("x-api-crawling-based");
+const crawlerMedia = "/projects/x-api-crawling-based";
+const crawlerSource = "https://github.com/kevinma21/x-api-crawling-based/blob/47671b0ebed8b8d6049fdc443e1c90a740e43cc4";
 
 export const projects: Project[] = [
     {
@@ -332,69 +333,78 @@ export const projects: Project[] = [
         slug: "x-api-crawling-based",
         name: "X Data Crawler",
         description:
-            "A Python crawler I built to collect public X conversations for research on Indonesian political sentiment.",
+            "A Python crawler I built to collect about 62,000 replies to posts by @jokowi for research on Indonesian political sentiment.",
         tech: ["Python", "Requests", "GraphQL", "CSV"],
         year: "2026",
         link: "https://github.com/kevinma21/x-api-crawling-based",
-        thumb: "/projects/x-api-crawling-based/crawler-preview.webp",
+        thumb: `${crawlerMedia}/research-preview.webp`,
         page: {
-            tagline: "Collect public replies with the original posts that give them context.",
+            tagline: "From @jokowi’s timeline to about 62,000 replies for sentiment research.",
             about: [
-                "For my research on Indonesian political sentiment, I needed a way to select posts from a public figure’s timeline and keep the original post beside each reply. A short response can be hard to interpret on its own. I built a Python crawler to collect those conversations and export them as CSV files for analysis.",
+                "I built a Python crawler to collect public replies to posts from Joko Widodo’s X account, @jokowi. The roughly 62,000 replies formed the dataset for my research on Indonesian political sentiment. I kept the original post text alongside each reply so I could read short responses in context during analysis.",
             ],
-            cover: crawler.cover,
-            poster: crawler.poster,
-            share: "/projects/x-api-crawling-based/crawler-share.jpg",
+            cover: `${crawlerMedia}/research-cover.webp`,
+            poster: `${crawlerMedia}/research-poster.webp`,
+            share: `${crawlerMedia}/research-share.jpg`,
             story: [
-                { kind: "heading", text: "Choose which posts to crawl" },
+                { kind: "heading", text: "Build the list of posts" },
                 {
                     kind: "text",
                     parts: [
-                        "I split the crawler into two scripts so I could review the list of posts before making requests for their replies. The timeline script takes an account ID, a date range, and a post limit. It reads the paginated GraphQL responses used by X’s web interface and writes matching post IDs and timestamps to a CSV. The reply crawler can reuse that same list across runs.",
+                        "I split the crawl into two stages so the same list of posts could drive multiple reply runs. XUserTimelineCrawler takes a numeric account ID, date bounds, and a post limit, then calls UserTweets, a GraphQL operation used by X’s web client. It walks the response’s timeline instructions and reads the post ID from rest_id and the timestamp from legacy.created_at.",
                     ],
                 },
-                { kind: "heading", text: "Keep each reply with its original post" },
                 {
                     kind: "text",
                     parts: [
-                        "For each post ID in the CSV, the reply script reads the original post and then follows the conversation’s pagination. Each exported row includes the original post text alongside the reply, its timestamp, the author’s name and handle, and its like and repost counts. Keeping those fields together makes it possible to review a reply in context directly from the export.",
+                        "The crawler skips posts newer than the upper bound and passes the bottom cursor back on the next request. It stops on a post older than the lower bound, at the post limit, or when the next cursor is missing. The resulting CSV contains tweet_id and created_at. ",
+                        { text: "Timeline crawler source", href: `${crawlerSource}/scripts/user_timeline_crawler.py` },
                     ],
                 },
-                { kind: "heading", text: "Resume an interrupted crawl" },
+                {
+                    kind: "image",
+                    src: `${crawlerMedia}/research-pipeline.webp`,
+                    alt: "Two-stage crawler pipeline. UserTweets filters the account timeline into a CSV of post IDs and timestamps. TweetDetail uses those IDs to export replies with their original post text. The batch runner records processed IDs in a JSON checkpoint.",
+                    width: 1440,
+                    height: 1040,
+                },
+                { kind: "heading", text: "Traverse each conversation" },
                 {
                     kind: "text",
                     parts: [
-                        "Both scripts use a shared request manager that retries network failures and waits before retrying rate-limited requests. The batch runner appends rows to the reply CSV and records each processed post ID in a JSON checkpoint. On restart, it skips the IDs already in that file. The checked-in batch configuration caps collection at 150 replies per post. See the batch configuration in ",
+                        "For each tweet_id, XTweetCrawler calls TweetDetail and looks up the entry for the original post to read its text. It then walks the conversation pages, flattens the instruction entries, and extracts posts from conversationthread items. The request uses X’s Relevance ranking and continues with a bottom or show-more-threads cursor. Pagination ends when the cursor is missing or unchanged, a request returns no data, or the configured reply limit is reached.",
+                    ],
+                },
+                {
+                    kind: "text",
+                    parts: [
+                        "The reply and user details come from separate branches of the GraphQL response. The parser combines them into one UTF-8 CSV row with the original post text, reply author’s handle and name, reply timestamp and text, and counts for likes and reposts. The batch example in the repository sets the configurable cap to 150 replies per post. ",
                         {
-                            text: "main.py",
-                            href: "https://github.com/kevinma21/x-api-crawling-based/blob/main/main.py",
+                            text: "Reply crawler source",
+                            href: `${crawlerSource}/scripts/tweet_crawler.py`,
                         },
-                        ".",
                     ],
                 },
-                { kind: "heading", text: "What the saved crawl captured" },
+                { kind: "heading", text: "Retry requests and resume the batch" },
                 {
                     kind: "text",
                     parts: [
-                        "The saved timeline CSV contains 255 post records from Anies Baswedan’s account, dated November 2024 through October 2025. The saved reply CSV contains 1,059 reply records dated October 13–27, 2025. The reply export is a sample shaped by the per-post cap and the conversations returned by X.",
+                        "Both crawlers use XRequestManager to serialize the GraphQL parameters and send requests through Python Requests. It retries network errors, backs off with jitter after rate-limit responses, and returns early on authorization errors. ",
+                        { text: "Request manager source", href: `${crawlerSource}/scripts/request_manager.py` },
                     ],
                 },
                 {
-                    kind: "gallery",
-                    title: "Crawler output",
-                    shots: [
-                        crawler.shot(
-                            "timeline",
-                            "Timeline export",
-                            "Bar chart of collected post records by month from November 2024 through October 2025",
-                            "Posts grouped by month in the saved timeline export."
-                        ),
-                        crawler.shot(
-                            "replies",
-                            "Reply export",
-                            "Bar chart of collected reply records by day in October 2025",
-                            "Replies grouped by day in the saved conversation export."
-                        ),
+                    kind: "text",
+                    parts: [
+                        "The batch runner appends each post’s reply rows to the output CSV, then records that post’s ID in progress.json. A restart skips those IDs. Because the append and checkpoint write happen separately, an interruption between them can produce duplicates on restart. A request that returns no data can also end a conversation early and leave a partial export marked as processed. ",
+                        { text: "Batch runner source", href: `${crawlerSource}/main.py` },
+                    ],
+                },
+                { kind: "heading", text: "What the research dataset represents" },
+                {
+                    kind: "text",
+                    parts: [
+                        "The roughly 62,000 replies are the records I collected from @jokowi conversations for the study. The number of original posts in that run is unknown. The export reflects the threads X returned in relevance order and how far the crawler paginated, including any per-post reply limit used for the run.",
                     ],
                 },
             ],

@@ -340,7 +340,7 @@ function Story({ blocks, still }: { blocks: StoryBlock[]; still: boolean }) {
                             alt={block.alt}
                             width={block.width}
                             height={block.height}
-                            sizes="(min-width: 1024px) 40rem, 100vw"
+                            sizes="(min-width: 1024px) 56rem, (min-width: 896px) 53rem, calc(100vw - 3rem)"
                             quality={IMAGE_QUALITY}
                             className="my-6 h-auto w-full rounded-[6px] border border-[color-mix(in_srgb,var(--foreground-color)_10%,transparent)]"
                         />
